@@ -69,4 +69,8 @@ Courses (subdoc)
 | DESTROY | remove course      | DELETE    | `/courses/:id`     |
 
 ### Wireframes
-![](wireFrames/)
+![](./readmepics/wireframe1.jpeg)
+![](./readmepics/wireframe.jpeg)
+
+###ERD
+![](./readmepics/erd.jpeg)
