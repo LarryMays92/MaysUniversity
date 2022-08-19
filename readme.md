@@ -1,4 +1,4 @@
-###Installation Instructions
+### Installation Instructions
 You Need To Run: python manage.py runserver
 
 ### User Stories
@@ -60,7 +60,7 @@ Courses (subdoc)
 | EDIT    | edit existing student | GET       | `/students/:id/edit` |
 | UPDATE  | update student       | PATCH     | `/students/:id`      |
 | DESTROY | remove student        | DELETE    | `/students/:id`      |
-### Medicine Routes
+### Course Routes
 #### Express
 | REST    | Description           | HTTP Verb | Express Route        |
 |---------|-----------------------|-----------|----------------------|
