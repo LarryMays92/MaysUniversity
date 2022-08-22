@@ -2,20 +2,20 @@
 You Need To Run: python manage.py runserver
 
 ### User Stories
--As an unauthenticated user, I want to be able to sign up..
--As an unauthenticated user, I want to be able to log in.
--As an authenticated user, I want to be able to change my password.
--As an authenticated user, I want to be able to log out.
--As an authenticated user, I want to be able to see all students.
--As an authenticated user, I want to be able to see a single student.
--As an authenticated user, I want to be able to create/enter a student into the system.
--As an authenticated user, I want to be able to edit/update a student's details.
--As an authenticated user, I want to be able to add class courses to a student.
--As an authenticated user, I want to be able to delete/remove a student.
--As an authenticated user, I want to be able to see all courses associated with a student.
--As an authenticated user, I want to be able to add a course to a student.
--As an authenticated user, I want to be able to update the course on a student.
--As an authenticated user, I want to be able to delete a course off a student's schedule.
+- As an unauthenticated user, I want to be able to sign up..
+- As an unauthenticated user, I want to be able to log in.
+- As an authenticated user, I want to be able to change my password.
+- As an authenticated user, I want to be able to log out.
+- As an authenticated user, I want to be able to see all students.
+- As an authenticated user, I want to be able to see a single student.
+- As an authenticated user, I want to be able to create/enter a student into the system.
+- As an authenticated user, I want to be able to edit/update a student's details.
+- As an authenticated user, I want to be able to add class courses to a student.
+- As an authenticated user, I want to be able to delete/remove a student.
+- As an authenticated user, I want to be able to see all courses associated with a student.
+- As an authenticated user, I want to be able to add a course to a student.
+- As an authenticated user, I want to be able to update the course on a student.
+- As an authenticated user, I want to be able to delete a course off a student's schedule.
 
 
 ### Models
@@ -29,10 +29,9 @@ Students: Array
 Student
     Name: String
     Age: Number
-    Grade: enum
-    Identify As: String
+    Classification: String
     Courses: Array
-    Emergency Contact Telephone #: String
+    Emergency Contact: Number
     Permanent Record: String
 
 Courses (subdoc)
@@ -41,36 +40,29 @@ Courses (subdoc)
     Duration: String
     Instructor: String
 
-### Authentication
-
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/` | `users#changepw`  |
-| DELETE | `/sign-out/`        | `users#signout`   |
-
-
-###URLs
+### Routes Table / URLs
+ REST    | Description           | HTTP Verb | Route        |
 |---------|-----------------------|-----------|----------------------|
 | INDEX   | students index         | GET       | `/students`          |
 | SHOW    | student show page     | GET       | `/students/:id`      |
 | NEW     | new student form      | POST      | `/students/new`      |
 | CREATE  | create new student    | POST      | `/students`          |
 | EDIT    | edit existing student | GET       | `/students/:id/edit` |
-| UPDATE  | update student       | PATCH     | `/students/:id`      |
+| UPDATE  | update student        | PATCH     | `/students/:id`      |
 | DESTROY | remove student        | DELETE    | `/students/:id`      |
-### Course Routes
-#### Express
-| REST    | Description           | HTTP Verb | Express Route        |
-|---------|-----------------------|-----------|----------------------|
 | NEW     | create new course   | POST      | `/courses/`        |
 | UPDATE  | update course       | PATCH     | `/courses/:id`     |
 | DESTROY | remove course      | DELETE    | `/courses/:id`     |
+| CREATE  | users#signup       |   POST   | `/sign-up`         |   
+| CREATE  | users#signin       |   POST  | `/sign-in`          |
+| UPDATE  | users#changepw     |  PATCH  | `/change-password/` |  
+| DELETE  | users#signout    |  DELETE   | `/sign-out/`        |
 
-### Wireframes
-![](./readmepics/wireframe1.jpeg)
-![](./readmepics/wireframe.jpeg)
 
-###ERD
-![](./readmepics/erd.jpeg)
+
+
+### ERD
+![](./readmepics/erd.png)
+
+### Wireframe
+![](./readmepics/wireframes.drawio.png)
