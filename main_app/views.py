@@ -49,43 +49,50 @@ class CourseDelete(DeleteView):
 def profile(request, username):
     user = User.objects.get(username=username)
     courses = Course.objects.filter(user=user)
+    students =Student.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'courses': courses})
 
-def cattoys_index(request):
-    cattoys = CatToy.objects.all()
-    return render(request, 'cattoys/index.html', { 'cattoys': cattoys })
+# def student_index(request):
+#     students = Student.objects.all()
+#     return render(request, 'students/all_students.html', { 'students': students })
 
-def cattoy_show(request, cattoy_id):
-    cattoy = CatToy.objects.get(id=cattoy_id)
-    return render(request, 'cattoys/show.html', { 'cattoy': cattoy })
+def student_show(request, student_id):
+    student = Student.objects.get(id=student_id)
+    return render(request, 'students/show.html', { 'student': student })
 
-class CatToyCreate(CreateView):
-    model = CatToy
+class StudentCreate(CreateView):
+    model = Student
     fields = '__all__'
-    success_url = '/cattoys'
-    template_name = 'cattoys/cattoy_form.html'
+    success_url = '/students'
+    template_name = 'students/student_form.html'
+
+    def form_valid(self, form):
+        #commit=False makes sure we don't save to the database
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/students')
+
+class StudentUpdate(UpdateView):
+    model = Student
+    fields = ['name', 'age', 'classification']
+    template_name = 'students/student_form.html'
 
     def form_valid(self, form):
         #commit=False makes sure we don't save to the database
         self.object = form.save(commit=False)
         self.object.save()
-        return HttpResponseRedirect('/cattoys')
+        return HttpResponseRedirect('/students/' + str(self.object.pk))
 
-class CatToyUpdate(UpdateView):
-    model = CatToy
-    fields = '__all__'
-    template_name = 'cattoys/cattoy_form.html'
+class StudentDelete(DeleteView):
+    model = Student
+    success_url = '/students'
+    template_name = 'students/student_confirm_delete.html'
 
-    def form_valid(self, form):
-        #commit=False makes sure we don't save to the database
-        self.object = form.save(commit=False)
-        self.object.save()
-        return HttpResponseRedirect('/cattoys/' + str(self.object.pk))
-
-class CatToyDelete(DeleteView):
-    model = CatToy
-    success_url = '/cattoys'
-    template_name = 'cattoys/cattoy_confirm_delete.html'
+def profile(request, username):
+    user = User.objects.get(username=username)
+    courses = Course.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'courses': courses})
 
 # class Students:
 #     def __init__(self, name, age, classification, emerg, permanent_record  ):

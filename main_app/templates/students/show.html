@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <p>Name: {{student.name}}</p>
+    <p>Classification: {{student.classification}}</p>
+
+    <a href="{% url 'course_update' course.id %}">Update Course</a>
+    <a href="{% url 'course_delete' course.id %}">Delete Course</a>
+
+{% endblock %}
