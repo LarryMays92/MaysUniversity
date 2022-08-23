@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>{{ username }}'s Courses:</h1>
+
+{% for course in courses %}
+<a href="/courses/{{ course.id }}">
+    <h3>{{ course.name }}</h3>
+</a>
+
+{% endfor %}
+
+{% endblock %}

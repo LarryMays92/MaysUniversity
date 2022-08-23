@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request, 'courses/index.html')
 
-def course_index(request):
+def courses_index(request):
     courses = Course.objects.all()
     return render(request, 'courses/all_courses.html', { 'courses': courses })
 
@@ -52,9 +52,9 @@ def profile(request, username):
     students =Student.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'courses': courses})
 
-# def student_index(request):
-#     students = Student.objects.all()
-#     return render(request, 'students/all_students.html', { 'students': students })
+def students_index(request):
+    students = Student.objects.all()
+    return render(request, 'students/all_students.html', { 'students': students })
 
 def student_show(request, student_id):
     student = Student.objects.get(id=student_id)

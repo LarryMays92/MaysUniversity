@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'maysuniversity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'courses',
+        'NAME': 'maysuniversity',
     }
 }
 
