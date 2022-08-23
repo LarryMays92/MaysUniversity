@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'maysuniversity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'maysuniversity',
+        'NAME': 'courses',
     }
 }
 
@@ -110,7 +110,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
