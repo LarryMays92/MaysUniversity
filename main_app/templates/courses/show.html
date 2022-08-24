@@ -3,8 +3,10 @@
 
 {% block content %}
 
-    <p>Name: {{course.name}}</p>
-    <p>Age: {{course.time}}</p>
+    <p>Course: {{course.name}}</p>
+    <p>Time: {{course.time}}</p>
+    <p> Instructor: {{user}}</p>
+    <p>Students: {{students.name }}</p>
 
     <a href="{% url 'course_update' course.id %}">Update Course</a>
     <a href="{% url 'course_delete' course.id %}">Delete Course</a>

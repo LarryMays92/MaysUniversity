@@ -25,7 +25,7 @@ class CourseCreate(CreateView):
 
     def form_valid(self, form):
         #commit=False makes sure we don't save to the database
-        self.object = form.save(commit=False)
+        self.object = form.save(commit=True)
         self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/courses')
@@ -57,7 +57,9 @@ def students_index(request):
     return render(request, 'students/all_students.html', { 'students': students })
 
 def student_show(request, student_id):
+    print('student_id+++++++++++++++++++++++++++++++',student_id)
     student = Student.objects.get(id=student_id)
+    print(student)
     return render(request, 'students/show.html', { 'student': student })
 
 class StudentCreate(CreateView):
@@ -115,7 +117,7 @@ def profile(request, username):
 #         self.time = time
 
 # courses = [
-#     Courses('Intro To Public Speakin', '1st Semester', '9:30am - 10:45am'),
+#     Courses('Intro To Public Speaking', '1st Semester', '9:30am - 10:45am'),
 #     Courses('Intro To Biology', '1st Semester', '11:15am - 12:30pm'),
 #     Courses('Health Wellness', '1st Semester', '1:15pm - 2:15pm'),
 #     Courses('Intro To Problem Solving', '21st Semester', '2:30pm -4:15pm')

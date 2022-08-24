@@ -19,13 +19,15 @@ class Course(models.Model):
 class Student(models.Model):
     name = models.CharField(max_length=100)
     age = models.CharField(max_length=100)
+    classification = models.CharField(max_length=100, blank=True) 
+
 
     def __str__(self):
         return self.name
 
 
 # reference to linking teachers with students and courses and vice versa
-# many to many relationship!!!!
+#many to many relationship!!
 
 # class Person(models.Model):
 #     name = models.CharField(max_length=128)

@@ -6,7 +6,8 @@
     <p>Name: {{student.name}}</p>
     <p>Classification: {{student.classification}}</p>
 
-    <a href="{% url 'course_update' course.id %}">Update Course</a>
-    <a href="{% url 'course_delete' course.id %}">Delete Course</a>
+    <a href="{% url 'student_update' student.id %}">Update Student</a>
+
+    <a href="{% url 'student_delete' student.id %}">Remove Student</a>
 
 {% endblock %}
