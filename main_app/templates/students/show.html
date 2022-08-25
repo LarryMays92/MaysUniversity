@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 
     <p>Name: {{student.name}}</p>
     <p>Classification: {{student.classification}}</p>
-    <!-- <p>Courses: {{student.courses}}</p> -->
+    <p>Courses: </p>
+    <ul>
+        {% for enrollment in enrolled_courses %}
+            <li> 
+                <a href="{% url 'courses_show' enrollment.course.id %}" > {{enrollment.course}} </a> 
+            </li>
+        {%  endfor %}
+    </ul>
 
     <a href="{% url 'student_update' student.id %}">Update Student</a>
 

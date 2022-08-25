@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Course, Student
+from .models import Course, Student, Enrollment
 from django.contrib.auth.models import User
 # Create your views here.
 # this is just like our req inside of express
@@ -58,9 +58,12 @@ def students_index(request):
 
 def student_show(request, student_id):
     print('student_id+++++++++++++++++++++++++++++++',student_id)
+    enrolled_courses = Enrollment.objects.select_related('students').filter(students=student_id)
+    print(enrolled_courses)
+    for enrollment in enrolled_courses:
+        print(enrollment.course)
     student = Student.objects.get(id=student_id)
-    print(student)
-    return render(request, 'students/show.html', { 'student': student })
+    return render(request, 'students/show.html', { 'student': student, 'enrolled_courses': enrolled_courses })
 
 class StudentCreate(CreateView):
     model = Student

@@ -4,10 +4,16 @@
 {% block content %}
 
     <p>Course: {{course.name}}</p>
-    <p>Class Start Date: {{students.name}}</p>
-    <p>Class End Date: {{students.name}}</p>
-    <!-- <p>Students: {{students.name}}</p> -->
-    <p>Instructor: {{user}}</p> 
+    <p>Class Start Date: {{course.start}}</p>
+    <p>Class End Date: {{course.end}}</p>  <p>Instructor: {{user}}</p> 
+    <p> Students: </p>
+    <ul>
+        {% for student in course.students.all %}
+            <li> <a href="{% url 'students_show' student.id %}" >{{student.name}} </a> </li>
+        {%  endfor %}
+    </ul>
+
+  
     <!-- might need this for enrollment not necessary here -->
 
     <a href="{% url 'course_update' course.id %}">Update Course</a>
