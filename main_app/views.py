@@ -32,7 +32,7 @@ class CourseCreate(CreateView):
 
 class CourseUpdate(UpdateView):
     model = Course
-    fields = ['name', 'duration', 'time']
+    fields = '__all__'
     template_name = 'courses/course_form.html'
 
     def form_valid(self, form):
@@ -80,7 +80,7 @@ class StudentCreate(CreateView):
 
 class StudentUpdate(UpdateView):
     model = Student
-    fields = ['name', 'age', 'classification']
+    fields = ['name', 'gpa', 'classification']
     template_name = 'students/student_form.html'
 
     def form_valid(self, form):
