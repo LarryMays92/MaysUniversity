@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Student(models.Model):
     name = models.CharField(max_length=100)
     classification = models.CharField(max_length=100, blank=False, default= 'Freshman') 
-    current_grade = models.CharField(max_length=100, default= '80%')
+    gpa = models.CharField(max_length=100, default= '3.5')
 
     def __str__(self):
         return self.name
