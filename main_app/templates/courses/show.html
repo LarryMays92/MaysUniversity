@@ -4,9 +4,11 @@
 {% block content %}
 
     <p>Course: {{course.name}}</p>
-    <p>Time: {{course.time}}</p>
-    <p> Instructor: {{user}}</p>
-    <p>Students: {{students.name }}</p>
+    <p>Class Start Date: {{students.name}}</p>
+    <p>Class End Date: {{students.name}}</p>
+    <!-- <p>Students: {{students.name}}</p> -->
+    <p>Instructor: {{user}}</p> 
+    <!-- might need this for enrollment not necessary here -->
 
     <a href="{% url 'course_update' course.id %}">Update Course</a>
     <a href="{% url 'course_delete' course.id %}">Delete Course</a>

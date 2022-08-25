@@ -5,10 +5,8 @@
 
 {% for student in students %}
 <a href="/students/{{student.id}}">
-    <p>Name: {{ student.name }}</p>
+    <p>{{ student.name }}</p>
 </a>
-<p>Age: {{student.age}}</p>
-<p>Classification: {{ student.classification }}</p>
 <hr />
 {% endfor %}
 <!-- <form action="post_url/" method="post">

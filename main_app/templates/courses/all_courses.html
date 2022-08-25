@@ -5,8 +5,8 @@
 
 {% for course in courses %}
 <a href="/courses/{{course.id}}">
-    <p>Name: {{ course.name }}</p>
-</a>
+    <p>{{ course.name }}</p>
+    </a>
 <p>Time: {{course.time }}</p>
 <p>Duration: {{ course.duration }}</p>
 <hr />
