@@ -1,18 +1,23 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
 from .models import Course, Student, Enrollment
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .forms import LoginForm
 # Create your views here.
 # this is just like our req inside of express
+@login_required
 def index(request):
     return render(request, 'courses/index.html')
-
+@login_required
 def courses_index(request):
     courses = Course.objects.all()
     return render(request, 'courses/all_courses.html', { 'courses': courses })
-
+@login_required
 def course_show(request, course_id):
     course = Course.objects.get(id=course_id)
     return render(request, 'courses/show.html', { 'course': course })
@@ -22,7 +27,7 @@ class CourseCreate(CreateView):
     fields = '__all__'
     success_url = '/courses'
     template_name = 'courses/course_form.html'
-
+    
     def form_valid(self, form):
         #commit=False makes sure we don't save to the database
         self.object = form.save(commit=True)
@@ -45,17 +50,17 @@ class CourseDelete(DeleteView):
     model = Course
     success_url = '/courses'
     template_name = 'courses/course_confirm_delete.html'
-
+@login_required
 def profile(request, username):
     user = User.objects.get(username=username)
     courses = Course.objects.filter(user=user)
     students =Student.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'courses': courses})
-
+@login_required
 def students_index(request):
     students = Student.objects.all()
     return render(request, 'students/all_students.html', { 'students': students })
-
+@login_required
 def student_show(request, student_id):
     print('student_id+++++++++++++++++++++++++++++++',student_id)
     enrolled_courses = Enrollment.objects.select_related('students').filter(students=student_id)
@@ -99,29 +104,58 @@ def profile(request, username):
     courses = Course.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'courses': courses})
 
-# class Students:
-#     def __init__(self, name, age, classification, emerg, permanent_record  ):
-#         self.name = name
-#         self.age = age
-#         self.classification = classification
-#         self.emerg = emerg 
+# login view
+def login_view(request):
+    # we can use the same view for multiple HTTP requests
+    # this can be done with a simple if statement
+    if request.method == 'POST':
+        # handle post request
+        # we want to authenticate the user with the username and pw
+        form = LoginForm(request.POST)
+        # validate the form data
+        if form.is_valid():
+            # get the username and pw and save them to variables
+            u = form.cleaned_data['username']
+            p = form.cleaned_data['password']
+            # here we use django's built in authenticate method
+            user = authenticate(username = u, password = p)
+            # if you found a user with matching credentials
+            if user is not None:
+                # if that user has not been disabled by admin
+                if user.is_active:
+                    # use django's built in login function
+                    login(request, user)
+                    return HttpResponseRedirect('/user/' + str(user.username))
+                else:
+                    print('the account has been disabled')
+            else:
+                print('the username or password is incorrect')
+    else:
+        # the request is a get, we render the login page
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
 
-# students = [
-#     Students('N. Johnson', '22', 'Sophmore', '234-665-2233'),
-#     Students('A. Davis', '21', 'Freshman', '478-593-1298'),
-#     Students('S. Mars', '20', 'Junior', '678-435-9743'),
-#     Students('L. Bennett', '24', 'Senior', '706-790-9919')
-# } 
+# logout view
+def logout_view(request):
+    # print('####### THIS IS THE REQUEST #######')
+    # print(request.user)
+    logout(request)
+    return HttpResponseRedirect('/login/')
 
-# class Courses:
-#     def __init__(self, name, age, classification, emerg, permanent_record  ):
-#         self.name = name
-#         self.duration = duration
-#         self.time = time
+# signup view
+def signup_view(request):
+    # if the req is a post, then sign them up
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return HttpResponseRedirect('/user/' + str(user.username))
+    # if the req is a get, then show the form
+    else:
+        form = UserCreationForm()
+        return render(request, 'signup.html', {'form': form})
 
-# courses = [
-#     Courses('Intro To Public Speaking', '1st Semester', '9:30am - 10:45am'),
-#     Courses('Intro To Biology', '1st Semester', '11:15am - 12:30pm'),
-#     Courses('Health Wellness', '1st Semester', '1:15pm - 2:15pm'),
-#     Courses('Intro To Problem Solving', '21st Semester', '2:30pm -4:15pm')
-# } 
+@login_required
+def after_login(request):
+    return HttpResponseRedirect('/user/'%request.user.id)
