@@ -1,26 +1,61 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+<style>
+            h1 {
+                text-align: center;
+                background-color: gold;
+                border-radius: 10px;   
+                }
+            a {
+                color: white;
+                text-decoration: none;
+                padding: 30px;
+                display: flex;
+                justify-content: left;
+                border: 2px solid white;
+                border-radius: 8px;
+                
+            }
+            
+            li {
+                list-style: none;
+                display: inline-block;
 
+            }
+            .students {
+                background-color: rgba(0,0,0,0.7);
+            }
+
+            .update {
+                display:inline-block;
+                padding-top: 100px;
+                color: white;
+                text-decoration: none;
+            }
+            
+</style>
 <head>
     <title>Mays University</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <h4> <a href="/students/create"> Add A New Student </a>  </h4>
-    <h4> <a href="/courses/create"> Add A New Course  </a>   </h4>
-    
-    <h5> <a href="/logout/"> Logout </a> </h5>
 
+    <ul class="nav">
+        <li> <a href="/students/create"> Add A New Student </a></li>
+        <li> <a href="/courses/create"> Add A New Course  </a>
+        <li style="float:right"> <a href="/logout/"> Logout </a></li>
+    </ul>
 </head>
 
 <body>
     <h1>
         <a href="/user/{{ user }}" >The Mays University</a></h1>
+        
     <hr />
 
     {% block content %}
     {% endblock %}
 
-    <footer>
+    <footer style ="margin-top: 200px;">
         All Rights Reserved, Mays University 1992
     </footer>
 </body>

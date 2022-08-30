@@ -1,3 +1,50 @@
 body {
-    background-color: goldenrod;
+    background-image: url("https://mays.tamu.edu/wp-content/uploads/2015/02/citycentre.jpg") ;
+    background-color: dodgerblue;
+    background-position: center;
+    background-size: auto;
+    height: 500px;
+    color: whitesmoke;
+    /* display:flex; */
+    /* flex-direction: column; */
+    
 }
+
+
+
+#Profile, #show {
+    background-color: rgba(0,0,0,0.7);
+    padding: 5px;
+    }
+#containerStyle {
+    background-color: black;
+}
+
+ul.nav {
+    list-style-type: none;
+    margin: 2px;
+    padding: 3px ;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+    margin-left: 10px;
+    }
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+footer {
+    margin: 10px;
+    position:relative;
+
+}
+

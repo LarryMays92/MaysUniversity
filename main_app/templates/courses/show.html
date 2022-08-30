@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
 
+{% block content %}
+<div class="students" id="show">
     <p>Course: {{course.name}}</p>
     <p>Class Start Date: {{course.start}}</p>
     <p>Class End Date: {{course.end}}</p> 
     <p>Course: {{course.time}}</p>
     <p>Instructor: {{user}}</p> 
-    <p> Students: </p>
+    <p> Students: 
     <ul>
         {% for student in course.students.all %}
-            <li> <a href="{% url 'students_show' student.id %}" >{{student.name}} </a> </li>
+            <li> <a style= "display: inline-block"; href="{% url 'students_show' student.id %}" >{{student.name}} </a> </li>
         {%  endfor %}
     </ul>
+    </p>
 
-  
     <!-- might need this for enrollment not necessary here -->
-
-    <a href="{% url 'course_update' course.id %}">Update Course</a>
+<div class="update"> <a href="{% url 'course_update' course.id %}">Update Course</a>
     <a href="{% url 'course_delete' course.id %}">Delete Course</a>
-
+</div> 
+</div>
 {% endblock %}

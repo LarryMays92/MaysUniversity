@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+<div class="students">
     <p>Name: {{student.name}}</p>
     <p>Classification: {{student.classification}}</p>
     <p>GPA: {{student.gpa}}</p>
@@ -13,9 +13,12 @@
             </li>
         {%  endfor %}
     </ul>
-
+<div class="update">
     <a href="{% url 'student_update' student.id %}">Update Student</a>
 
     <a href="{% url 'student_delete' student.id %}">Remove Student</a>
+</div>
+
+</div>
 
 {% endblock %}
